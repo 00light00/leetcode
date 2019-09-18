@@ -33,7 +33,11 @@
 class Solution {
 public:
     string addBinary(string a, string b) {
-        
+        string re;
+        reverse(a.begin(), a.end());
+        reverse(b.begin(), b.end());
+        int lena = a.size(), lenb = b.size();
+        for (int i =)
     }
 };
 
