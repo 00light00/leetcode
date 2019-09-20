@@ -40,32 +40,16 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode * re = new ListNode(0);
-        ListNode * p = re;
-        int flag = 0;
-        while (l1) {
-            int a1 = l1->val, a2 = 0;
-            if (l2) {
-                a2 = l2->val;
-            }
-            int tmp = a1 + a2 + p->val;
-            flag =  tmp/10;
-            p->val = tmp%10;
-            p->next = new ListNode(flag);
-            l1 = l1->next;
-            l2 = l2->next;
-            p = p->next;
+        ListNode* re;
+        if (!l1 && !l2) re = NULL;
+        else if (!l1) re = l1;
+        else if (!l2) re = l2;
+        re = new ListNode(l1->val + l2->val);
+        re->next = addTwoNumbers(l1->next, l2->next);
+        if (re->val > 9) {
+            re->val %= 10;
+            re->next = addTwoNumbers(re->next, new ListNode(1));
         }
-        while (l2) {
-            int tmp = p->val + l2->val;
-            flag = tmp/10;
-            p->val = tmp%10;
-            p->next = new ListNode(flag);
-            l2 = l2->next;
-            p = p->next;
-        }
-        if (p->val == 0)
-            delete p;
         return re;
     }
 };
