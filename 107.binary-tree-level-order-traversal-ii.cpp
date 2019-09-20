@@ -50,7 +50,29 @@
 class Solution {
 public:
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
-        
+        queue<pair<int, TreeNode*> > que;
+        int level = 1;
+        vector<vector<int> > re;
+        vector<int> relevel;
+        que.push(make_pair(0, root));
+        while (!que.empty()) {
+            TreeNode* now = que.front().second;
+            if (now) {
+                if (que.front().first == level) {
+                    level++;
+                    re.push_back(relevel);
+                    relevel.clear();
+                }
+                relevel.push_back(now->val);
+                que.push(make_pair(level, now->left));
+                que.push(make_pair(level, now->right));
+            }
+            que.pop();
+        }
+        if (relevel.size())
+            re.push_back(relevel);
+        reverse(re.begin(), re.end());
+        return re;
     }
 };
 
