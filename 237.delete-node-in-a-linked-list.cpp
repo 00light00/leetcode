@@ -64,13 +64,12 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        if (head->val == node->val) 
-            head = head->next;
-        ListNode* p = head;
-        while (head && head->next) {
-            p->
+        if (node) {
+            node->val = node->next->val;
+            node->next = node->next->next;
+            delete node->next;
         }
-        
+        return ;        
     }
 };
 
